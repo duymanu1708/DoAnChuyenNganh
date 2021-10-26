@@ -1,0 +1,527 @@
+Create table LOAISANPHAM
+(
+	MaLoaiSP int  not null primary key AUTO_INCREMENT,
+	TenLoaiSP varchar(100) not null
+	
+);
+
+create table TaiKhoan
+(
+	MaTK int  not null primary key AUTO_INCREMENT,
+	TenTK varchar(50),
+	Email varchar(50),
+	DiaChi varchar(100),
+	SDT varchar(13),
+	TenDN varchar(20),
+	MatKhau varchar(20),
+	LoaiTK int
+);
+CREATE TABLE SANPHAM(
+	MaSP int  NOT NULL primary key AUTO_INCREMENT,
+	MaLoaiSP int  NOT NULL,
+	TenSP nvarchar(300) ,
+	HinhAnh varchar(300) ,
+	NhaCC nvarchar(100),
+	GiaMua int ,
+	TienSP int ,
+	NgayCapNhat DATETIME,
+	SoLuongBan INT CHECK(SoLuongBan>0),
+	SoLanXem INT DEFAULT 0,
+	Mota Longtext 
+);
+
+Create table BinhLuanSP
+(
+	MaBL int  not null primary key  AUTO_INCREMENT,
+	MaSP int not null,
+	MaTK int not null,
+	NgayBL datetime,
+	NoiDungBL text
+	
+);
+create table DonHang
+(
+	MaDH int  not null primary key AUTO_INCREMENT,
+	MaTK int not null,
+	NgayLapDH datetime,
+	TenKH varchar(300),
+	DiaChi varchar(300),
+	SDT varchar(13),
+	PTTT varchar(300),
+	TinhTrang varchar(300),
+	ThanhTien int
+);
+create table ChiTietDonHang
+(
+	MaCTDH int not null primary key AUTO_INCREMENT,
+	MaDH int not null,
+	MaSP int not null,
+	TenSize varchar(10),
+	SL int
+);
+
+create table Size_SanPham
+(
+	MaSize varchar(20) not null,
+	MaSP int not null,
+	TenSize varchar(10),
+	SoLuong int not null,
+	SoLuongBan int CHECK(SoLuongBan>0)
+);
+
+alter table SANPHAM
+add constraint FK_SANPHAM_LOAISP foreign key (MaLoaiSP) references LOAISANPHAM(MaLoaiSP);
+
+alter table BinhLuanSP
+add constraint FK_BinhLuan foreign key (MaSP) references SanPham(MaSP) on delete cascade,
+add constraint FK_MaTK foreign key (MaTK) references TaiKhoan(MaTK) on delete cascade ;
+
+alter table DonHang
+add constraint FK_MaTKDH foreign key (MaTK) references TaiKhoan(MaTK) on delete cascade;
+
+alter table ChiTietDonHang
+add constraint FK_CTDH foreign key (MaDH) references DonHang(MaDH) on delete cascade;
+
+alter table Size_SanPham
+add constraint FK_SizeSanPham_SANPHAM  foreign key (MaSP) references MaSP(MaSP) on delete cascade;
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',1,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',1,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',1,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',1,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',2,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',2,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',2,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',2,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',3,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',3,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',3,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',3,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',4,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',4,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',4,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',4,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',5,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',5,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',5,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',5,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',6,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',6,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',6,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',6,'XXL',20,10);
+
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',7,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',7,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',7,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',7,'XXL',20,10);
+
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',8,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',8,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',8,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',8,'XXL',20,10);
+
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',9,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',9,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',9,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',9,'XXL',20,10);
+
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',10,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',10,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',10,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',10,'XXL',20,10);
+
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',11,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',11,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',11,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',11,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',12,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',12,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',12,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',12,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',13,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',13,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',13,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',13,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',14,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',14,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',14,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',14,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',15,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',15,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',15,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',15,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',16,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',16,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',16,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',16,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',17,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',17,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',17,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',17,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',18,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',18,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',18,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',18,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',19,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',19,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',19,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',19,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',20,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',20,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',20,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',20,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',21,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',21,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',21,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',21,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',22,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',22,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',22,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',22,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',23,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',23,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',23,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',23,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',24,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',24,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',24,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',24,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',25,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',25,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',25,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',25,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',26,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',26,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',26,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',26,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',27,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',27,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',27,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',27,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',28,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',28,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',28,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',28,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',29,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',29,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',29,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',29,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',30,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',30,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',30,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',30,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',31,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',31,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',31,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',31,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',32,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',32,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',32,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',32,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',33,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',33,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',33,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',33,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',34,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',34,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',34,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',34,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',35,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',35,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',35,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',35,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',36,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',36,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',36,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',36,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',37,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',37,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',37,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',37,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',38,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',38,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',38,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',38,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',39,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',39,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',39,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',39,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',40,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',40,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',40,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',40,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',41,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',41,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',41,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',41,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',42,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',42,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',42,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',42,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',43,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',43,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',43,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',43,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',44,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',44,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',44,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',44,'XXL',20,10);
+
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('M',45,'M',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('L',45,'L',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XL',45,'XL',20,10);
+insert into Size_SanPham(MaSize,MaSP,TenSize,SoLuong,SoLuongBan) values('XXL',45,'XXL',20,10);
+
+
+insert into TaiKhoan(TenTK,Email,DiaChi,SDT,TenDN,MatKhau,LoaiTK) values(N'Admin','','','','admin','1',1);
+insert into TaiKhoan(TenTK,Email,DiaChi,SDT,TenDN,MatKhau,LoaiTK) values(N'Tèo','teo@gmail.com','','0314578','teo','1',2);
+insert into TaiKhoan(TenTK,Email,DiaChi,SDT,TenDN,MatKhau,LoaiTK) values(N'Duy Siêu Nhân','duy@gmail.com','','0314572','duy','1',2);
+
+insert into LOAISANPHAM(TenLoaiSP) values(N'Áo khoác đơn giản');
+insert into LOAISANPHAM(TenLoaiSP)  values(N'Áo thun đơn giản');
+insert into LOAISANPHAM(TenLoaiSP)  values(N'Áo sơ-mi đơn giản');
+insert into LOAISANPHAM(TenLoaiSP)  values(N'Quần dài đơn giản');
+insert into LOAISANPHAM(TenLoaiSP)  values(N'Quần short đơn giản');
+insert into LOAISANPHAM(TenLoaiSP) values(N'Áo thun form rộng');
+insert into LOAISANPHAM(TenLoaiSP)  values(N'Áo thun form tiêu chuẩn');
+insert into LOAISANPHAM(TenLoaiSP)  values(N'Áo thun 3 lỗ');
+insert into LOAISANPHAM(TenLoaiSP)  values(N'Áo thun cổ trụ');
+
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(1,N'Áo Khoác Classic Đơn Giản M5','AoKhoacClassicM5.jpg',N'Classic',100000,123000,'2020-12-30 00:00:00',400,0,N'Chất liệu: Vải Kaki không thun
+Thành phần: 100% cotton
+- Cổ tay có đai dán cố định
+- Nhiều túi trước có đây kéo
+- Túi trong tiện lợi
+- Khóa cao qua cằm
+- Reverse Coil Zipper
+(Những chiếc khoá túi này có bề mặt ngoài dẹp, phẳng trong khi răng khoá thì ở trong)');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(1,N'Áo Khoác Classic Đơn Giản Thần Cổ Đại Anubis M1','AoKhoacClassicM1',N'Classic',30000,59000,'2020-12-30 00:00:00',999,0,N'- Chất liệu: MINI ZURRY
+- Thành Phần: 94% COTTON 6% SPANDEX
++ Thân thiện
++ Thấm hút thoát ẩm
++ Mềm mại
++ Ít nhăn
++ Co giản tối ưu
+- Logo Anubis in nhũ
+- Bo tay xỏ ngón đa dụng
+- Reverse Coil Zipper
+(Những chiếc khoá túi này có bề mặt ngoài dẹp, phẳng trong khi răng khoá thì ở trong)
+- Túi trong + 2 túi trước có dây kéo tiện dụng
+- Cổ cao qua cằm
+- Nón rộng');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(1,N'Áo Khoác Classic Đơn Giản 12VAHDT Vạn Xuân Kiến Quốc M2','AoKhoacClassicM2',N'Classic',70000,90000,'2020-12-30 00:00:00',300,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(1,N'Áo Khoác Classic Đơn Giản Ngân Hà 4 Element M2','AoKhoacClassicElementM2.jpg',N'Classic',79000,89000,'2020-12-30 00:00:00',231,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(1,N'Áo Khoác Classic Đơn Giản M6','AoKhoacClassicM6.jpg',N'Classic',40000,67000,'2020-12-30 00:00:00',500,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(2,N'Áo Thun 3 Lỗ Đơn Giản M3','Ao3LoM3.jpg',N'Sport',77000,97000,'2020-12-30 00:00:00',600,0,'Chất liệu: Cotton 2C
+Thành phần: 100% Cotton
+- Co dãn 2 chiều
+- Thấm hút mồ hôi tốt mang lại cảm giác thoáng mát');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(2,N'Áo Thun 3 Lỗ Đơn Giản M6','Ao3LoM6.jpg',N'Sport',107000,127000,'2020-12-30 00:00:00',200,0,'Chất liệu: Cotton 2 Chiều
+Thành phần: 100% cotton
+- Thân thiện
+- Thấm hút thoát ẩm
+- Mềm mại
+- Kiểm soát mùi
+- Điều hòa nhiệt
++ Họa tiết thêu đắp giống
+- HDSD:
++ Nên giặt chung với sản phẩm cùng màu
++ Không dùng thuốc tẩy hoặc xà phòng có tính tẩy mạnh
++ Nên phơi trong bóng râm để giữ sp bền màu');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(2,N'Áo Thun Cổ Tròn Đơn Giản M18','AoThunM18.jpg',N'Compact',107000,127000,'2020-12-30 00:00:00',310,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(2,N'Áo Thun Cổ Tròn Đơn Giản M9','AoThunm9.jpg',N'Compact',7000,27000,'2020-12-30 00:00:00',120,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(2,N'Áo Thun Cổ Tròn Đơn Giản M1','AoThunM1.jpg',N'Compact',27000,47000,'2020-12-30 00:00:00',300,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(3,N'Sơ Mi Cổ Lãnh Tụ Đơn Giản M25','SoMiM25.jpg',N'Limen',235000,255000,'2020-12-30 00:00:00',450,0,'Chất liệu: Vải Sơ Mi Cotton
+Thành phần: 100% Cotton');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(3,N'Sơ Mi Tay Dài Đơn Giản M20','SoMiM20.jpg',N'T-Cool',265000,285000,'2020-12-30 00:00:00',100,0,'Chất liệu: Vải Sơ Mi
+Thành phần: 100% T-cool
+- Mềm - Mịn - Mát
+- Giữ phom dáng
+- Co giãn tối ưu
+- Thấm hút thoát ẩm
+- Vải nhẹ
+- Ít nhăn - dễ ủi
+- Nhanh khô');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(3,N'Sơ Mi Tay Dài Đơn Giản M19','SoMiM19.jpg',N'T-Cool',265000,285000,'2020-12-30 00:00:00',390,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(3,N'Sơ Mi Tay Ngắn Đơn Giản M3','SoMim3.jpg',N'Model plus',205000,225000,'2020-12-30 00:00:00',308,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(3,N'Sơ Mi Tay Ngắn Đơn Giản M4','SoMiM4.jpg',N'Model plus',235000,255000,'2020-12-30 00:00:00',301,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(4,N'Quần Dài Jogger Đơn Giản M6','QuanM6.jpg',N'Jogger',329000,349000,'2020-12-30 00:00:00',210,0,'Chất liệu: Vải Kaki Thun
+Thành phần: 96% cotton 4% spandex
+- Mềm- Mịn-Mát
+- Giữ Phom dáng
+- Co giãn tối ưu
+-Thân thiên
+- Nguồn gốc tự nhiên
+-Thấm hút thoát ẩm');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(4,N'Quần Dài Jogger Đơn Giản M1','quanM1.jpg',N'Stretch',405000,425000,'2020-12-30 00:00:00',398,0,'Chất liệu: Jean Ultra Stretch
+Thành phần: 55% cotton , 21% recycle poly 14% tencel lyocell 9% rayon 1% spandex
+- Mịn - Mền - Mượt
+- Độ co giãn tốt
+- Thân thiện môi trường.
+- Thoải mái
++ Wash trơn đơn giản
++ Thêu túi trước chữ Ultra Stretch');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(4,N'Quần Dài Jean Slimfit Đơn Giản M4','quanM4.jpg',N'Slimfit',405000,425000,'2020-12-30 00:00:00',398,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(4,N'Quần Dài Vải Đơn Giản M1','quanDGM1.jpg',N'Slimfit',305000,325000,'2020-12-30 00:00:00',342,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(4,N'Quần Dài Jean Slimfit Đơn Giản 12VAHDT Vạn Xuân Kiến Quốc Ver2','quanVer2.jpg',N'Slimfit',405000,425000,'2020-12-30 00:00:00',420,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(5,N'Quần Short Đơn Giản 12VAHDT Vạn Xuân Kiến Quốc M2','quanshortM2.jpg',N'Gia Phát',205000,225000,'2020-12-30 00:00:00',100,0,'- Chất liệu:
+MINI ZURRY
+- Thành Phần:
++ 94% COTTON
+- Thân thiện
+- Thấm hút thoát ẩm
+- Mềm mại
+- Ít nhăn
++ 6% SPANDEX
+Co giản tối ưu
+- Logo VXKQ thêu
+- Họa tiết sọc in dẻo');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(5,N'Quần Short Đơn Giản M2','quanshortJM2.jpg',N'Gia Phát',205000,255000,'2020-12-30 00:00:00',200,0,'- Chất liệu:
+MINI ZURRY
+- Thành Phần:
++ 94% COTTON
+- Thân thiện
+-Thấm hút thoát ẩm
+- Mềm mại
+- Ít nhăn
++ 6% SPANDEX
+Co giản tối ưu');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(5,N'Quần Short Đơn Giản Y Nguyên Bản M2 ','quanshortYM2.jpg',N'Gia Phát',165000,185000,'2020-12-30 00:00:00',300,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(5,N'Quần Short Đơn Giản 12VAHDT Văn Hiến Chi Bang M3','quanshortM3.jpg',N'Gia Phát',165000,185000,'2020-12-30 00:00:00',450,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(5,N'Quần Short Đơn Giản M1','quanshortJM1.jpg',N'Gia Phát',235000,255000,'2020-12-30 00:00:00',600,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(6,N'Áo Thun Cổ Tròn Thể Thao M8 ','aothunM8.jpg',N'Gia Phát',165000,185000,'2020-12-30 00:00:00',100,0,'Chất liệu: Poly 4 Chiều
+Thành phần: 85% poly 15% spandex freshgear
+- Thoáng khí
+- Nhẹ
+- Thấm hút mồ hôi
+- Nhanh khô
+- Khử mùi tự nhiên
+- Mát mẻ
+- Co giãn tốt
+- Ít nhăn
++ Họa tiết in nhũ bạc
+HDSD:
+Ủi ở nhiệt độ dưới 150 độ C để tránh làm vải mất độ đàn hồi do quá nóng
+Không nên giặt sp trong nước nóng trên 40 độ C hay phơi ngoài nắng gắt vì sẽ làm vải sơ cưng, bạc màu vải.
+Không nên sử dụng chất tẩy mạnh.
+Nên lội trái áo khi phơi để bảo về màu sắc và hình in trên áo');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(6,N'Áo Thun Cổ Tròn Thiên Nhiên Kì Vĩ SG M10','aothunfrM10.jpg',N'Gia Phát',165000,185000,'2020-12-30 00:00:00',80,0,'Chất liệu: Cotton Compact
+Thành phần: 100% cotton
+- Thân thiện
+- Thấm hút thoát ẩm
+- Mềm mại
+- Kiểm soát mùi
+- Điều hòa nhiệt
++ Họa tiết in dẻo
+- HDSD:
++ Nên giặt chung với sản phẩm cùng màu
++ Không dùng thuốc tẩy hoặc xà phòng có tính tẩy mạnh
++ Nên phơi trong bóng râm để giữ sp bền màu');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(6,N'Áo Thun Cổ Tròn Thiên Nhiên Kì Vĩ Khủng Long M2','aothunfrM2.jpg',N'Compact',165000,185000,'2020-12-30 00:00:00',100,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(6,N'Áo Thun Cổ Tròn Thiên Nhiên Kì Vĩ M14','aothunfrM14.jpg',N'Compact',165000,185000,'2020-12-30 00:00:00',180,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(6,N'Áo Thun Cổ Tròn Thể Thao M7','aothunfrM7.jpg',N'Gia Phát',165000,185000,'2020-12-30 00:00:00',370,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(7,N'Áo Thun Cổ Tròn Thiên Nhiên Kì Vĩ Khủng Long M4 ','aothuntcM4.jpg',N'Compact',165000,185000,'2020-12-30 00:00:00',100,0,'Chất liệu: Cotton Compact
+Thành phần: 100% Cotton
+- Thân thiện
+- Thấm hút thoát ẩm
+- Mềm mại
+- Kiểm soát mùi
+- Điều hòa nhiệt
++ Họa tiết in bột nổi
+- HDSD:
++ Nên giặt chung với sản phẩm cùng màu
++ Không dùng thuốc tẩy hoặc xà phòng có tính tẩy mạnh
++ Nên phơi trong bóng râm để giữ sp bền màu');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(7,N'Áo Thun Cổ Tròn Đơn Giản M13','aothuntcM13.jpg',N'Compact',130000,150000,'2020-12-30 00:00:00',980,0,'Chất liệu: Cotton 4 Chiều
+Thành phần: 95% cotton 5% spandex
+- Thoáng mát
+- Hút ẩm tốt
+- Co dãn tốt
++ Họa tiết in bóng');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(7,N'Áo Thun Cổ Tròn Đơn Giản M5','aothuntcM5.jpg',N'Compact',165000,185000,'2020-12-30 00:00:00',100,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(7,N'Áo Thun Cổ Tròn Đơn Giản M51','aothuntcM51.jpg',N'Compact',165000,185000,'2020-12-30 00:00:00',300,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(7,N'Áo Thun Cổ Tròn Thiên Nhiên Kì Vĩ M12','aothuntcM12.jpg',N'Compact',165000,185000,'2020-12-30 00:00:00',90,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(8,N'Áo Thun 3 Lỗ Đơn Giản M3','ao3loM3.jpg',N'Compact',100000,120000,'2020-12-30 00:00:00',9,0,'Chất liệu: Cotton 2C
+Thành phần: 100% Cotton
+- Co dãn 2 chiều
+- Thấm hút mồ hôi tốt mang lại cảm giác thoáng mát');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(8,N'Áo Thun 3 Lỗ Thể Thao M4','ao3loM4.jpg',N'Compact',130000,150000,'2020-12-30 00:00:00',3,0,'Chất liệu: Poly 4 Chiều
+Thành phần: 85% poly 15% spandex freshgear
+- Thoáng khí
+- Nhẹ
+- Thấm hút mồ hôi
+- Nhanh khô
+- Khử mùi tự nhiên
+- Mát mẻ
+- Co giãn tốt
+- Ít nhăn
++ Họa tiết in dẻo + in nhũ bạc
+HDSD:
+Ủi ở nhiệt độ dưới 150 độ C để tránh làm vải mất độ đàn hồi do quá nóng
+Không nên giặt sp trong nước nóng trên 40 độ C hay phơi ngoài nắng gắt vì sẽ làm vải sơ cưng, bạc màu vải.
+Không nên sử dụng chất tẩy mạnh.
+Nên lội trái áo khi phơi để bảo về màu sắc và hình in trên áo');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(8,N'Áo Thun 3 Lỗ Đơn Giản M2','ao3loM2.jpg',N'Compact',100000,120000,'2020-12-30 00:00:00',54,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(8,N'Áo Thun 3 Lỗ Đơn Giản M6','ao3loM6.jpg',N'Compact',130000,150000,'2020-12-30 00:00:00',102,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(8,N'Áo Thun 3 Lỗ Đơn Giản M9','ao3loM9.jpg',N'Compact',130000,150000,'2020-12-30 00:00:00',65,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(9,N'Áo Thun Cổ Trụ Đơn Giản J01','aocotruJ1.jpg',N'Compact',120000,150000,'2020-12-30 00:00:00',9,0,'Chất liệu: Cotton 4 Chiều
+Thành phần: 95% cotton 5% Spandex
+- Co giãn tốt
+- Độ bền cao');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(9,N'Áo Thun Cổ Trụ Đơn Giản H01','apcotruH1.jpg',N'Compact',185000,205000,'2020-12-30 00:00:00',3,0,'Chất liệu: vải cá sấu cotton/poly
+Thành phần: 72% cotton 28% poly
+- Thoáng mát và thoải mái
+- Sợi vải nhanh khô
+
+HDSD:
+- Không sử dụng thuốc tẩy hoặc bột giặt có độ tẩy cao
+- Tránh phơi dưới ánh nắng trực tiếp để bảo quản màu sắc');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(9,N'Áo Thun Cổ Trụ Đơn Giản H02','aocotruH2.jpg',N'Compact',185000,205000,'2020-12-30 00:00:00',54,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(9,N'Áo Thun Cổ Trụ Đơn Giản D01','aocotruD1.jpg',N'Compact',205000,225000,'2020-12-30 00:00:00',102,0,'');
+insert into SANPHAM(MaLoaiSP,TenSP,HinhAnh,NhaCC,GiaMua,TienSP,NgayCapNhat,SoLuongBan,SoLanXem,Mota)  values(9,N'Áo Thun Cổ Trụ Đơn Giản C01','aocotruC1.jpg',N'Compact',205000,225000,'2020-12-30 00:00:00',65,0,'');
+
+
+

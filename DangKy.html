@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width-device-width,inititak-scale=1.0">
+<script src="https://fontawesome.com/1147679ae7.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="CSS.style">
+<link rel="stylesheet" href="fontawesome-free-6.0.0-beta2-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="CSS.css"/>
+
+<script>
+    function getValue(id){
+        return document.getElementById(id).value.trim();    
+    }
+    function showErr(key,mess){
+        document.getElementById(key + '_err').innerHTML = mess;
+    }
+    function validate() {
+        var flag=true;
+
+        var username = getValue('username')
+        if(username==''){
+            flag=false;
+            showErr('username','Bạn chưa nhập Tên tài khoản')
+        }
+        else if(username.length<5){
+            flag=false;
+            showErr('username','Tên tài khoản phải lớn hơn 5 ký tự')
+        }
+        else if(!/^[a-zA-Z0-9]+$/.test(username)){
+            flag=false;
+            showErr('username','Tên tài khoản không đúng định dạng')
+        }
+        else{
+            showErr('username','')
+        }
+        /*if(username =='' || username.length < 5 || !/^[a-zA-Z0-9]+$/.test(username)){
+            flag=false
+            showErr('username','Vui lòng kiểm tra lại Tên tài khoản!');
+        }*/
+
+        var password=getValue('password')
+        var repassword=getValue('rePassword')
+        if(password ==''){
+            flag=false
+            showErr('pass','Bạn chưa nhập mật khẩu!');
+        }
+        else if(password.length < 8){
+            flag=false
+            showErr('pass','Mật khẩu phải lớn hơn 8 ký tự!');
+        }
+        else if(repassword==''){
+            flag=false
+            showErr('repass','Bạn chưa nhập lại mật khẩu!!');
+        }
+        else if(password!=repassword){
+            flag=false
+            showErr('repass','Mật khẩu nhập lại không khớp!');
+        }
+        else{
+            showErr('pass','')
+            showErr('repass','')
+        }
+        /*if(password =='' || password.length < 8 || password!=repassword){
+            flag=false
+            showErr('pass','Vui lòng kiểm tra lại Mật khẩu!');
+        }*/
+
+        var SDT =getValue('SDT');
+        if(SDT ==''){
+            flag=false
+            showErr('SDT','Bạn chưa nhập Số điện thoại!');
+        }
+        else if(!/[0-9]{10}/.test(SDT)){
+            flag=false
+            showErr('SDT','Số điện thoại không đúng định dạng!');
+        }
+        else{
+            showErr('SDT','')
+        }
+        /*if(SDT == ''&&!/[0-9]{10}/.test(SDT)){
+            flag=false;
+            showErr('SDT','Vui lòng kiểm tra lại Số điện thoại!');
+        }*/
+
+        var TenKH =getValue('TenKH');
+        if(TenKH ==''){
+            flag=false
+            showErr('TenKH','Bạn chưa nhập Tên của bạn!');
+        }
+        else if(TenKH.length < 5){
+            flag=false
+            showErr('TenKH','Tên khách hàng phải lớn hơn 5 ký tự!');
+        }
+        else if(!/[a-zA-Z0-9]/.test(TenKH)){
+            flag=false
+            showErr('TenKH','Tên khách hàng không đúng định dạng!');
+        }
+        else{
+            showErr('TenKH','')
+        }
+        /*if(TenKH =='' || TenKH.length < 5 || !/[a-zA-Z0-9]/.test(username)){
+            flag=false;
+            showErr('TenKH','Vui lòng kiểm tra lại Tên khách hàng của bạn!');
+        }*/
+
+        var Email =getValue('Email');
+        var mailformat=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if(Email ==''){
+            flag=false
+            showErr('mail','Bạn chưa nhập Email!');
+        }
+        else if(!mailformat.test(Email)){
+            flag=false
+            showErr('mail','Email không đúng định dạng!');
+        }
+        else{
+            showErr('mail','')
+        }
+        /*if(!mailformat.test(Email)){
+            flag=false;
+            showErr('mail','Vui lòng kiểm tra lại Email!');
+        }*/
+        return flag;
+    }
+</script>
+
+<title>NTD SHOP</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href=""><img src="HinhAnh/logo.png" style="width: 80px"> </a>
+        </div>
+        <div class="menu">
+            <li><a href="">TRANG CHỦ</a>
+            <li><a href="SanPham.html">ÁO NAM</a>
+                <ul class="submenu">
+                    <li><a href="">Ao so mi</a></li>
+                    <li><a href="">Ao co tru</a></li>
+                    <li><a href="">Ao thun</a></li>
+                    <li><a href="">Ao khoac</a></li>
+                </ul>
+            </li>
+            <li><a href="">QUẦN NAM</a>
+                <ul class="submenu">
+                    <li><a href="">Quan dai</a></li>
+                    <li><a href="">Quan jean</a></li>
+                    <li><a href="">Quan Short</a></li>
+                    <li><a href="">Ao khoac</a></li>
+                </ul>
+            </li>
+            <li><a href="">GIỚI THIỆU</a></li>
+            <li><a href="">TIN TỨC</a></li>
+            <li><a href="">THÔNG TIN</a></li>
+        </div>
+        <div class="other">
+            <li><input placeholder="Tim kiem" type="text"><i class="fas fa-search" href=""></i></li>
+            <li><a class="fas fa-user" href=""></a></li>
+            <li><a class="fas fa-shopping-cart" href=""></a></li>
+        </div>
+    </header>
+<!------------Noi dung-------------->
+<div class="rightmain" style="padding-top: 120px;">
+    <form method="" action="" id="loginform">
+        <table >
+            <tr>
+                <td class="phantrang" colspan="2" style="font-size: xx-large;padding-left: 90px;padding-top: -30px;"><strong>Đăng Ký</strong></td>
+            </tr>
+            <tr>
+                <td class="phantrang" colspan="2" style="font-size: 20px;padding-top: 30px;"><strong>Thông tin tài khoản</strong></td>
+                
+            </tr>
+            <tr>
+                <td style="padding-left: 40px;"> <strong>Tài khoản: </strong> </td>
+                <td style="height: 49px">
+                    <input type="text" id="username" name="username" class="input" style="height: 30px;">
+                    <span style="color: red; " id="username_err"></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 40px;"> <strong>Mật khẩu: </strong> </td>
+                <td style="height: 49px">
+                    <input type="password" id="password" name="password" class="input" style="height: 30px;">
+                    <span  style="color: red; "id="pass_err"></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 40px;"> <strong>Nhập lại mật khẩu: </strong> </td>
+                <td style="height: 49px">
+                    <input type="password" id="rePassword" name="rePassword" class="input" style="height: 30px;">
+                    <span style="color: red; " id="repass_err"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="phantrang" colspan="2" style="font-size: 20px;padding-top: 30px;"><strong>&nbsp;Thông tin khách hàng</strong></td>
+                
+            </tr>
+            <tr>
+                <td style="padding-left: 40px;"> <strong>Họ tên: </strong> </td>
+                <td style="height: 49px">
+                    <input type="text" id="TenKH" name="TenKH" class="input" style="height: 30px;">
+                    <span style="color: red; " id="TenKH_err"></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 40px;"> <strong>Địa chỉ: </strong> </td>
+                <td style="height: 49px">
+                    <textarea style="width: 175px;height: 30px;" id="DiaChi" name="DiaChi" class="input"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 40px;"> <strong>Email: </strong> </td>
+                <td style="height: 49px">
+                    <input type="text" id="Email" name="Email" class="input" style="height: 30px;">
+                    <span style="color: red; " id="mail_err"></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 40px;"> <strong>SĐT: </strong> </td>
+                <td style="height: 49px">
+                    <input type="text" id="SDT" name="SDT" class="input" style="height: 30px;">
+                    <span style="color: red; " id="SDT_err"></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="kc" style="height: 61px;padding-bottom: 30px;padding-top: 30px; ">
+                    <input type="submit" onclick="return validate();" name="btnDK" class="btnDat" id="btnDK" value="Đăng Ký" />
+                </td>
+            </tr>
+        </table>
+        <div style="text-align: center;"  class="result"></div>
+    </form>
+</div>
+<!-----------Footer----------------->
+    <section class="app-container">
+        <p>Tải ứng dụng NTD SHOP</p>
+        <div class="app-google">
+            <img src="HinhAnh/app.png">
+            <img src="HinhAnh/android.jpg">
+            <p><br><br> Nhập bản tin NTD SHOP</p>
+            <li><input type="text" placeholder="Nhập email của bạn...."><a class="fas fa-arrow-right" href=""></a></li>
+        </div>
+    </section>
+    <div class="footer-top">
+        <li><a href=""><img src="HinhAnh/logo.png" alt=""></a></li>
+        <li><a href=""></a>Liên hệ</li>
+        <li><a href=""></a>Tuyển dụng</li>
+        <li><a href=""></a>Giới thiệu</li>
+        <li>
+            <a href="" class="fab fa-facebook-f"></a>
+            <a href="" class="fab fa-twitter"></a>
+            <a href="" class="fab fa-youtube"></a>
+        </li>
+    </div>
+    <div class="footer-center">
+        <p>Công ty Cổ phần Dự Kim với số đăng ký kinh doanh: 0105777650 <br>
+            Địa chỉ đăng ký: Tổ dân phố Tháp, P.Đại Mỗ, Q.Nam Từ Liêm, TP.Hà Nội, Việt Nam - 0243 205 2222 <br>
+            Đặt hàng online : <b>0246 662 3434</b> .
+        </p>
+    </div>
+    <div class="footer-bottom">
+        ©Ivymoda All rights reserved
+    </div>
+    </body>
